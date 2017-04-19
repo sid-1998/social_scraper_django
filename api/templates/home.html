@@ -1,1 +1,29 @@
 Hello {{ user }}
+<br/>
+<br/>
+
+{% if cUsername %}
+  CodeChef : <br/>
+  Username: {{ cUsername }} <br/>
+  Country: {{ cPlace }}
+  Rating: {{ cRating }} <br/>
+  Global Rank: {{ cGlobal }} <br/>
+  {{ cPlace }} Rank: {{ cCountry }} <br/>
+
+{% else %}
+<form method="post" action='codechef/'>
+  {% csrf_token %}
+  Codechef <input name='username' placeholder='username' value="vigzmv"/>
+</form>
+{% endif %}
+
+<br/>
+<br/>
+{% if quora %}
+  Quora Username: {{ quora }}
+{% else %}
+<form method="post" action='quora/'>
+  {% csrf_token %}
+  Quora <input name='username' placeholder='username' />
+</form>
+{% endif %}
