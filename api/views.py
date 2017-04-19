@@ -30,7 +30,7 @@ def index(request):
     try:
         Coder = Codechef.objects.get(user = current_user)
         cUsername = Coder.username
-        cUame = Coder.name
+        cName = Coder.name
         cRating = Coder.rating
         cGlobal = Coder.globalRank
         cCountry = Coder.countryRank
@@ -39,18 +39,29 @@ def index(request):
     except:
         cUsername = cUame = cRating = cGlobal = cCountry = cPlace = None
     try:
-        quora = Quora.objects.get(user = current_user).username
+        quora = Quora.objects.get(user = current_user)
+        qUsername = quora.username
+        qAnswers = quora.answers
+        qTCount = quora.totalViews
+        qMCount = quora.monthViews
+        qName = quora.name
+
     except:
         quora = None
 
     context = {
         'user' : current_user,
         'cUsername' : cUsername,
+        'cName' : cName,
         'cRating' : cRating,
         'cGlobal' : cGlobal,
         'cCountry' : cCountry,
         'cPlace' : cPlace,
-        'quora': quora,
+        'qUsername' : qUsername,
+        'qAnswers' : qAnswers,
+        'qTCount' : qTCount,
+        'qMCount' : qMCount,
+        'qName' : qName,
     }
 
     return render(request, 'home.html', context)
@@ -88,8 +99,25 @@ def codechef(request):
 def quora(request):
     if request.method == 'POST':
         username =  request.POST.get('username')
+
+        url = 'https://www.quora.com/profile/' + username
+        response = urllib2.urlopen(url)
+        soup = BeautifulSoup(response, 'html.parser')
+        print url
+        answers = soup.find('div', {'class':'list_header'}).text.split()[0]
+        totalViews = soup.find('div', {'class':'AboutListItem AnswerViewsAboutListItem'}).find('span',{'class':'main_text'}).text.split()[0]
+        monthViews = soup.find('div', {'class':'AboutListItem AnswerViewsAboutListItem'}).find('span',{'class':'detail_text'}).text.split()[0]
+        name = soup.find('div', {'class':'ProfileNameAndSig'}).find('span', {'class':'user'}).text
+
         user =  request.user
-        quora = Quora(username=username, user=user)
+        quora = Quora(
+            username=username,
+            user=user,
+            name=name,
+            totalViews=totalViews,
+            monthViews=monthViews,
+            answers=answers,
+        )
         quora.save()
 
     return redirect('/')

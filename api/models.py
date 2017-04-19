@@ -19,3 +19,7 @@ class Codechef(models.Model):
 class Quora(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
     username = models.CharField(max_length=30, default="", blank=True)
+    answers = models.CharField(max_length=30, default="", blank=True)
+    monthViews = models.CharField(max_length=30, default="", blank=True)
+    totalViews = models.CharField(max_length=30, default="", blank=True)
+    name = models.CharField(max_length=30, default="", blank=True)

@@ -4,6 +4,7 @@ Hello {{ user }}
 
 {% if cUsername %}
   CodeChef : <br/>
+  Profile Name: {{ cName }} <br/>
   Username: {{ cUsername }} <br/>
   Country: {{ cPlace }}
   Rating: {{ cRating }} <br/>
@@ -19,11 +20,16 @@ Hello {{ user }}
 
 <br/>
 <br/>
-{% if quora %}
-  Quora Username: {{ quora }}
+{% if qUsername %}
+Quora: <br/>
+Profile Name: {{ qName }} <br/>
+Username: {{ qUsername }} <br/>
+Answers: {{ qAnswers }} <br/>
+Total Count: {{ qTCount }} <br/>
+Month Count: {{ qMCount }} <br/>
 {% else %}
 <form method="post" action='quora/'>
   {% csrf_token %}
-  Quora <input name='username' placeholder='username' />
+  Quora <input name='username' placeholder='username' value="Vignesh-M-56"/>
 </form>
 {% endif %}
