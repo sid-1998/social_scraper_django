@@ -1,5 +1,6 @@
 body {
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background-color: #ECEFF1;
 }
 
 table {
@@ -14,6 +15,19 @@ td, th {
     padding: 8px;
 }
 
+th {
+  background-color: #BDBDBD;
+}
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #E0E0E0;
+}
+
+#home{
+  width: 26%;
+  border:0;
+}
+
+#home > tbody > tr > td {
+  border: 0;
+  background-color: #CFD8DC;
 }

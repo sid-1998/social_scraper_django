@@ -5,51 +5,122 @@
   <br/>
   Hello <strong> {{ user }} !</strong>
   <br/>
-  <br/>
-
 
   {% if user.is_superuser %}
   <strong> Admin: </strong>
   <a href="/stats">All Users Stats</a> <br/>
-  <br/>
-  <br/>
   {% endif %}
 
-
-
   {% if cUsername %}
-    CodeChef : <br/>
-    Profile Name: {{ cName }} <br/>
-    Username: {{ cUsername }} <br/>
-    Country: {{ cPlace }}
-    Rating: {{ cRating }} <br/>
-    Global Rank: {{ cGlobal }} <br/>
-    {{ cPlace }} Rank: {{ cCountry }} <br/>
+    <h3> CodeChef : </h3>
+    <table id="home">
+      <tr>
+        <td>
+          Profile Name:
+        </td>
+        <td>
+          <strong> {{ cName }} </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Username:
+        </td>
+        <td>
+          <strong> {{ cUsername }} </strong>
+        </td>
+      </tr>
+        <td>
+          Country:
+        </td>
+        <td>
+          <strong> {{ cPlace }} </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Rating:
+        </td>
+        <td>
+          <strong> {{ cRating }} </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Global Rank:
+        </td>
+        <td>
+          <strong> {{ cGlobal }} </strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong> {{ cPlace }} </strong> Rank:
+        </td>
+        <td>
+          <strong> {{ cCountry }} </strong>
+        </tr>
+      </tr>
+  </table>
 
   {% else %}
   <form method="post" action='codechef/'>
     {% csrf_token %}
     <strong> Codechef: </strong> <br/>
     Enter username &nbsp;&nbsp;<input name='username' placeholder='username'
-    value="vigzmv"/>
+    value=""/>
     <input type="submit" value="Submit">
   </form>
   {% endif %}
 
-  <br/>
-  <br/>
   {% if qUsername %}
-  Quora: <br/>
-  Profile Name: {{ qName }} <br/>
-  Username: {{ qUsername }} <br/>
-  Answers: {{ qAnswers }} <br/>
-  Total Count: {{ qTCount }} <br/>
-  Month Count: {{ qMCount }} <br/>
+  <h3> Quora : </h3>
+  <table id="home">
+    <tr>
+      <td>
+        Profile Name:
+      </td>
+      <td>
+        <strong> {{ qName }} </strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Username:
+      </td>
+      <td>
+        <strong> {{ qUsername }} </strong>
+      </td>
+    </tr>
+      <td>
+        Answers:
+      </td>
+      <td>
+        <strong> {{ qAnswers }} </strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total Views:
+      </td>
+      <td>
+        <strong> {{ qTCount }} </strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Monthly Views:
+      </td>
+      <td>
+        <strong> {{ qMCount }} </strong>
+      </td>
+    </tr>
+</table>
   {% else %}
   <form method="post" action='quora/'>
     {% csrf_token %}
     <strong> Quora: </strong> <br/>
-    Enter Username &nbsp;&nbsp;<input name='username' placeholder='username' value="Vignesh-M-56"/>
+    Enter Username &nbsp;&nbsp;<input name='username' placeholder='username' value=""/>
     <input type="submit" value="Submit">
   </form>
   {% endif %}

@@ -3,11 +3,10 @@
 {% block content %}
   {% if coders %}
   <br/>
-  <br/>
   <h4> Codechef Users Sorted by rating </h4>
-  <br/>
   <table>
     <tr>
+      <th>Rank</th>
       <th>User</th>
       <th>Profile Name</th>
       <th>Rating</th>
@@ -15,6 +14,9 @@
     </tr>
     {% for coder in coders %}
       <tr>
+        <td>
+          <strong>{{ forloop.counter }}</strong>
+        </td>
         <td>
           <strong>{{ coder.user }}</strong>
         </td>
@@ -36,11 +38,10 @@
 
   {% if quoras %}
   <br/>
-  <br/>
   <h4> Quora Users Sorted by No of Answers </h4>
-  <br/>
   <table>
     <tr>
+      <th>Rank</th>
       <th>User</th>
       <th>Profile Name</th>
       <th>Answers</th>
@@ -48,6 +49,9 @@
     </tr>
     {% for quora in quoras %}
     <tr>
+      <td>
+        <strong>{{ forloop.counter }}</strong>
+      </td>
       <td>
         <strong>{{ quora.user }}</strong>
       </td>
