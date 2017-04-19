@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if coders %}
+  <br/>
+  <br/>
+  <h4> Codechef Users Sorted by rating </h4>
+  <br/>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Profile Name</th>
+      <th>Rating</th>
+      <th>Global Rank</th>
+    </tr>
+    {% for coder in coders %}
+      <tr>
+        <td>
+          <strong>{{ coder.user }}</strong>
+        </td>
+        <td>
+          <strong>{{ coder.name }}</strong>
+        </td>
+        <td>
+          {{ coder.rating }}
+        </td>
+        <td>
+          {{ coder.globalRank }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  No CodeChef Users Present
+  {% endif %}
+
+  {% if quoras %}
+  <br/>
+  <br/>
+  <h4> Quora Users Sorted by No of Answers </h4>
+  <br/>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Profile Name</th>
+      <th>Answers</th>
+      <th>Total Views</th>
+    </tr>
+    {% for quora in quoras %}
+    <tr>
+      <td>
+        <strong>{{ quora.user }}</strong>
+      </td>
+      <td>
+        <strong>{{ quora.name }}</strong>
+      </td>
+      <td>
+        {{ quora.answers }}
+      </td>
+      <td>
+        {{ quora.totalViews }}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  No Quora Users Present
+  {% endif %}
+{% endblock %}

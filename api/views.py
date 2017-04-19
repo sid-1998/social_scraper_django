@@ -22,7 +22,7 @@ def signup(request):
             return redirect('/')
     else:
         form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', context={'form': form})
 
 @login_required(login_url='/signup')
 def index(request):
@@ -37,7 +37,7 @@ def index(request):
         cPlace = Coder.country
 
     except:
-        cUsername = cUame = cRating = cGlobal = cCountry = cPlace = None
+        cUsername = cUame = cRating = cGlobal = cCountry = cPlace = cName = None
     try:
         quora = Quora.objects.get(user = current_user)
         qUsername = quora.username
@@ -47,7 +47,7 @@ def index(request):
         qName = quora.name
 
     except:
-        quora = None
+        qUsername = qAnswers = qTCount = qMCount = qName = None
 
     context = {
         'user' : current_user,
@@ -64,7 +64,7 @@ def index(request):
         'qName' : qName,
     }
 
-    return render(request, 'home.html', context)
+    return render(request, 'home.html', context=context)
 
 def codechef(request):
     if request.method == 'POST':
@@ -121,3 +121,16 @@ def quora(request):
         quora.save()
 
     return redirect('/')
+
+@login_required(login_url='/signup')
+def stats(request):
+    if not request.user.is_superuser:
+        return redirect('/')
+    else:
+        coders = Codechef.objects.all().order_by('-rating');
+        quoras = Quora.objects.all().order_by('-answers');
+        context = {
+            'coders': coders,
+            'quoras': quoras,
+        }
+        return render(request, 'stats.html', context=context)

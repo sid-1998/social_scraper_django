@@ -1,35 +1,57 @@
-Hello {{ user }}
-<br/>
-<br/>
+{% extends 'base.html' %}
 
-{% if cUsername %}
-  CodeChef : <br/>
-  Profile Name: {{ cName }} <br/>
-  Username: {{ cUsername }} <br/>
-  Country: {{ cPlace }}
-  Rating: {{ cRating }} <br/>
-  Global Rank: {{ cGlobal }} <br/>
-  {{ cPlace }} Rank: {{ cCountry }} <br/>
+{% block content %}
 
-{% else %}
-<form method="post" action='codechef/'>
-  {% csrf_token %}
-  Codechef <input name='username' placeholder='username' value="vigzmv"/>
-</form>
-{% endif %}
+  <br/>
+  Hello <strong> {{ user }} !</strong>
+  <br/>
+  <br/>
 
-<br/>
-<br/>
-{% if qUsername %}
-Quora: <br/>
-Profile Name: {{ qName }} <br/>
-Username: {{ qUsername }} <br/>
-Answers: {{ qAnswers }} <br/>
-Total Count: {{ qTCount }} <br/>
-Month Count: {{ qMCount }} <br/>
-{% else %}
-<form method="post" action='quora/'>
-  {% csrf_token %}
-  Quora <input name='username' placeholder='username' value="Vignesh-M-56"/>
-</form>
-{% endif %}
+
+  {% if user.is_superuser %}
+  <strong> Admin: </strong>
+  <a href="/stats">All Users Stats</a> <br/>
+  <br/>
+  <br/>
+  {% endif %}
+
+
+
+  {% if cUsername %}
+    CodeChef : <br/>
+    Profile Name: {{ cName }} <br/>
+    Username: {{ cUsername }} <br/>
+    Country: {{ cPlace }}
+    Rating: {{ cRating }} <br/>
+    Global Rank: {{ cGlobal }} <br/>
+    {{ cPlace }} Rank: {{ cCountry }} <br/>
+
+  {% else %}
+  <form method="post" action='codechef/'>
+    {% csrf_token %}
+    <strong> Codechef: </strong> <br/>
+    Enter username &nbsp;&nbsp;<input name='username' placeholder='username'
+    value="vigzmv"/>
+    <input type="submit" value="Submit">
+  </form>
+  {% endif %}
+
+  <br/>
+  <br/>
+  {% if qUsername %}
+  Quora: <br/>
+  Profile Name: {{ qName }} <br/>
+  Username: {{ qUsername }} <br/>
+  Answers: {{ qAnswers }} <br/>
+  Total Count: {{ qTCount }} <br/>
+  Month Count: {{ qMCount }} <br/>
+  {% else %}
+  <form method="post" action='quora/'>
+    {% csrf_token %}
+    <strong> Quora: </strong> <br/>
+    Enter Username &nbsp;&nbsp;<input name='username' placeholder='username' value="Vignesh-M-56"/>
+    <input type="submit" value="Submit">
+  </form>
+  {% endif %}
+
+{% endblock %}
