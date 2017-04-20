@@ -134,6 +134,8 @@ def quora(request):
         soup = BeautifulSoup(response, 'html.parser')
         try:
             answers = soup.find('div', {'class':'list_header'}).text.split()[0]
+            if answers == 'Answers':
+                answers = 'Not Found'
         except:
             answers = 'Not Found'
         try:
