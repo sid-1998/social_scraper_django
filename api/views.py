@@ -113,6 +113,18 @@ def codechef(request):
 
     return redirect('/')
 
+def delCodechef(request):
+    if request.method == 'POST':
+        Codechef.objects.filter(user=request.user).delete()
+
+    return redirect('/')
+
+def delQuora(request):
+    if request.method == 'POST':
+        Quora.objects.filter(user=request.user).delete()
+
+    return redirect('/')
+
 def quora(request):
     if request.method == 'POST':
         username =  request.POST.get('username')

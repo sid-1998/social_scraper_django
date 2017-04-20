@@ -63,7 +63,13 @@
       </tr>
   </table>
 
+  <form class="" action="delCodechef/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Remove" />
+  </form>
+
   {% else %}
+  <br/>
   <form method="post" action='codechef/'>
     {% csrf_token %}
     <strong> Codechef: </strong> <br/>
@@ -116,7 +122,14 @@
       </td>
     </tr>
 </table>
+
+<form class="" action="delQuora/" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Remove" />
+</form>
+
   {% else %}
+  <br/>
   <form method="post" action='quora/'>
     {% csrf_token %}
     <strong> Quora: </strong> <br/>
