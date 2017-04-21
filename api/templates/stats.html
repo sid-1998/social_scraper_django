@@ -1,6 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% if users %}
+  <br/>
+  <h4> Ranked Users </h4>
+  <table>
+    <tr>
+      <th>Rank</th>
+      <th>User</th>
+      <th>Codechef Score</th>
+      <th>Quora Score</th>
+      <th>Total Score</th>
+    </tr>
+    {% for user in users %}
+      <tr>
+        <td>
+          <strong>{{ forloop.counter }}</strong>
+        </td>
+        <td>
+          <strong>{{ user.username }}</strong>
+        </td>
+        <td>
+          {{ user.codechefScore |floatformat:3}}
+        </td>
+        <td>
+          {{ user.quoraScore |floatformat:3}}
+        </td>
+        <td>
+          {{ user.totalScore |floatformat:3}}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  No Users Present
+  <br/>
+  {% endif %}
+
   {% if coders %}
   <br/>
   <h4> Codechef Users Sorted by rating </h4>

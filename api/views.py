@@ -4,14 +4,16 @@ from django.shortcuts import render, redirect
 from models import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.db.models import IntegerField
+from django.db.models import IntegerField, Max, Min
 from django.db.models.functions import Cast
+from django.contrib.auth.models import User
 
 from bs4 import BeautifulSoup
 import requests
-import re
-import time
+# import re
+# import time
 import urllib2
+import operator
 
 def signup(request):
     if request.method == 'POST':
@@ -169,10 +171,42 @@ def stats(request):
     if not request.user.is_superuser:
         return redirect('/')
     else:
-        coders = Codechef.objects.annotate(ratings=Cast('rating',IntegerField())).order_by('-ratings');
-        quoras = Quora.objects.annotate(answer=Cast('answers',IntegerField())).order_by('-answer');
+        coders = Codechef.objects.annotate(ratings=Cast('rating',IntegerField())).order_by('-ratings')
+        quoras = Quora.objects.annotate(answer=Cast('answers',IntegerField())).order_by('-answer')
+        users = User.objects.all()
+
+        maxCodechef = coders.aggregate(Max('ratings'))['ratings__max']
+        maxCodechef = float(maxCodechef)
+        minCodechef = coders.aggregate(Min('ratings'))['ratings__min']
+        minCodechef = float(minCodechef)
+
+        maxQuora = quoras.aggregate(Max('answer'))['answer__max']
+        maxQuora = float(maxQuora)
+        minQuora = quoras.aggregate(Min('answer'))['answer__min']
+        minQuora = float(minQuora)
+
+        # calculating score for users
+        for user in users:
+            codechefScore = list(coders.filter(user=user))[0].rating
+            codechefScore = float(codechefScore)
+            codechefScore = (codechefScore - minCodechef)/(maxCodechef - minCodechef)
+            user.codechefScore = codechefScore
+
+            quoraScore = list(quoras.filter(user=user))[0].answers
+            quoraScore = float(quoraScore)
+            quoraScore = (quoraScore - minQuora)/(maxQuora - minQuora)
+            user.quoraScore = quoraScore
+
+            user.totalScore = (codechefScore * 1.0 + quoraScore * 1.0) / 2.0
+
+        users = list(users)
+
+        # sorting list
+        users.sort(key = operator.attrgetter('totalScore'), reverse=True)
+
         context = {
             'coders': coders,
             'quoras': quoras,
+            'users': users
         }
         return render(request, 'stats.html', context=context)
