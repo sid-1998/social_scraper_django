@@ -1,110 +1,96 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  {% if users %}
-  <br/>
-  <h4> Ranked Users </h4>
-  <table>
-    <tr>
-      <th>Rank</th>
-      <th>User</th>
-      <th>Codechef Score</th>
-      <th>Quora Score</th>
-      <th>Total Score</th>
-    </tr>
-    {% for user in users %}
-      <tr>
-        <td>
-          <strong>{{ forloop.counter }}</strong>
-        </td>
-        <td>
-          <strong>{{ user.username }}</strong>
-        </td>
-        <td>
-          {{ user.codechefScore |floatformat:3}}
-        </td>
-        <td>
-          {{ user.quoraScore |floatformat:3}}
-        </td>
-        <td>
-          {{ user.totalScore |floatformat:3}}
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-  {% else %}
-  No Users Present
-  <br/>
-  {% endif %}
-
-  {% if coders %}
-  <br/>
-  <h4> Codechef Users Sorted by rating </h4>
-  <table>
-    <tr>
-      <th>Rank</th>
-      <th>User</th>
-      <th>Profile Name</th>
-      <th>Rating</th>
-      <th>Global Rank</th>
-    </tr>
-    {% for coder in coders %}
-      <tr>
-        <td>
-          <strong>{{ forloop.counter }}</strong>
-        </td>
-        <td>
-          <strong>{{ coder.user }}</strong>
-        </td>
-        <td>
-          <strong>{{ coder.name }}</strong>
-        </td>
-        <td>
-          {{ coder.rating }}
-        </td>
-        <td>
-          {{ coder.globalRank }}
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-  {% else %}
-  No CodeChef Users Present
-  <br/>
-  {% endif %}
-
-  {% if quoras %}
-  <br/>
-  <h4> Quora Users Sorted by No of Answers </h4>
-  <table>
-    <tr>
-      <th>Rank</th>
-      <th>User</th>
-      <th>Profile Name</th>
-      <th>Answers</th>
-      <th>Total Views</th>
-    </tr>
-    {% for quora in quoras %}
-    <tr>
-      <td>
-        <strong>{{ forloop.counter }}</strong>
-      </td>
-      <td>
-        <strong>{{ quora.user }}</strong>
-      </td>
-      <td>
-        <strong>{{ quora.name }}</strong>
-      </td>
-      <td>
-        {{ quora.answers }}
-      </td>
-      <td>
-        {{ quora.totalViews }}
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
-  {% else %}
-  No Quora Users Present
-  {% endif %}
-{% endblock %}
+{% extends 'base.html' %} {% block content %} {% if users %}
+<br/>
+<h4> Ranked Users </h4>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>User</th>
+    <th>Codechef Score</th>
+    <th>Quora Score</th>
+    <th>Total Score</th>
+  </tr>
+  {% for user in users %}
+  <tr>
+    <td>
+      <strong>{{ forloop.counter }}</strong>
+    </td>
+    <td>
+      <strong>{{ user.username }}</strong>
+    </td>
+    <td>
+      {{ user.codechefScore |floatformat:3}}
+    </td>
+    <td>
+      {{ user.quoraScore |floatformat:3}}
+    </td>
+    <td>
+      {{ user.totalScore |floatformat:3}}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %} No Users Present
+<br/> {% endif %} {% if coders %}
+<br/>
+<h4> Codechef Users Sorted by rating </h4>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>User</th>
+    <th>Profile Name</th>
+    <th>Rating</th>
+    <th>Global Rank</th>
+  </tr>
+  {% for coder in coders %}
+  <tr>
+    <td>
+      <strong>{{ forloop.counter }}</strong>
+    </td>
+    <td>
+      <strong>{{ coder.user }}</strong>
+    </td>
+    <td>
+      <strong>{{ coder.name }}</strong>
+    </td>
+    <td>
+      {{ coder.rating }}
+    </td>
+    <td>
+      {{ coder.globalRank }}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %} No CodeChef Users Present
+<br/> {% endif %} {% if quoras %}
+<br/>
+<h4> Quora Users Sorted by No of Answers </h4>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>User</th>
+    <th>Profile Name</th>
+    <th>Answers</th>
+    <th>Total Views</th>
+  </tr>
+  {% for quora in quoras %}
+  <tr>
+    <td>
+      <strong>{{ forloop.counter }}</strong>
+    </td>
+    <td>
+      <strong>{{ quora.user }}</strong>
+    </td>
+    <td>
+      <strong>{{ quora.name }}</strong>
+    </td>
+    <td>
+      {{ quora.answers }}
+    </td>
+    <td>
+      {{ quora.totalViews }}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %} No Quora Users Present {% endif %} {% endblock %}

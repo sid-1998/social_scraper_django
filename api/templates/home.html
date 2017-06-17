@@ -1,126 +1,114 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<br/> Hello <strong> {{ user }} !</strong>
+<br/> {% if user.is_superuser %}
+<strong> Admin: </strong>
+<a href="/stats">All Users Stats</a> <br/> {% endif %} {% if cUsername %}
+<h3> CodeChef : </h3>
+<table id="home">
+  <tr>
+    <td>
+      Profile Name:
+    </td>
+    <td>
+      <strong> {{ cName }} </strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Username:
+    </td>
+    <td>
+      <strong> {{ cUsername }} </strong>
+    </td>
+  </tr>
+  <td>
+    Country:
+  </td>
+  <td>
+    <strong> {{ cPlace }} </strong>
+  </td>
+  </tr>
+  <tr>
+    <td>
+      Rating:
+    </td>
+    <td>
+      <strong> {{ cRating }} </strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Global Rank:
+    </td>
+    <td>
+      <strong> {{ cGlobal }} </strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong> {{ cPlace }} </strong> Rank:
+    </td>
+    <td>
+      <strong> {{ cCountry }} </strong>
+  </tr>
+  </tr>
+</table>
 
-  <br/>
-  Hello <strong> {{ user }} !</strong>
-  <br/>
+<form class="" action="delCodechef/" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Remove" />
+</form>
 
-  {% if user.is_superuser %}
-  <strong> Admin: </strong>
-  <a href="/stats">All Users Stats</a> <br/>
-  {% endif %}
-
-  {% if cUsername %}
-    <h3> CodeChef : </h3>
-    <table id="home">
-      <tr>
-        <td>
-          Profile Name:
-        </td>
-        <td>
-          <strong> {{ cName }} </strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Username:
-        </td>
-        <td>
-          <strong> {{ cUsername }} </strong>
-        </td>
-      </tr>
-        <td>
-          Country:
-        </td>
-        <td>
-          <strong> {{ cPlace }} </strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Rating:
-        </td>
-        <td>
-          <strong> {{ cRating }} </strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Global Rank:
-        </td>
-        <td>
-          <strong> {{ cGlobal }} </strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <strong> {{ cPlace }} </strong> Rank:
-        </td>
-        <td>
-          <strong> {{ cCountry }} </strong>
-        </tr>
-      </tr>
-  </table>
-
-  <form class="" action="delCodechef/" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Remove" />
-  </form>
-
-  {% else %}
-  <br/>
-  <form method="post" action='codechef/'>
-    {% csrf_token %}
-    <strong> Codechef: </strong> <br/>
-    Enter username &nbsp;&nbsp;<input name='username' placeholder='username'
-    value=""/>
-    <input type="submit" value="Submit">
-  </form>
-  {% endif %}
-
-  {% if qUsername %}
-  <h3> Quora : </h3>
-  <table id="home">
-    <tr>
-      <td>
-        Profile Name:
-      </td>
-      <td>
-        <strong> {{ qName }} </strong>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Username:
-      </td>
-      <td>
-        <strong> {{ qUsername }} </strong>
-      </td>
-    </tr>
-      <td>
-        Answers:
-      </td>
-      <td>
-        <strong> {{ qAnswers }} </strong>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Total Views:
-      </td>
-      <td>
-        <strong> {{ qTCount }} </strong>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Monthly Views:
-      </td>
-      <td>
-        <strong> {{ qMCount }} </strong>
-      </td>
-    </tr>
+{% else %}
+<br/>
+<form method="post" action='codechef/'>
+  {% csrf_token %}
+  <strong> Codechef: </strong> <br/> Enter username &nbsp;&nbsp;<input name='username' placeholder='username' value="" />
+  <input type="submit" value="Submit">
+</form>
+{% endif %} {% if qUsername %}
+<h3> Quora : </h3>
+<table id="home">
+  <tr>
+    <td>
+      Profile Name:
+    </td>
+    <td>
+      <strong> {{ qName }} </strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Username:
+    </td>
+    <td>
+      <strong> {{ qUsername }} </strong>
+    </td>
+  </tr>
+  <td>
+    Answers:
+  </td>
+  <td>
+    <strong> {{ qAnswers }} </strong>
+  </td>
+  </tr>
+  <tr>
+    <td>
+      Total Views:
+    </td>
+    <td>
+      <strong> {{ qTCount }} </strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Monthly Views:
+    </td>
+    <td>
+      <strong> {{ qMCount }} </strong>
+    </td>
+  </tr>
 </table>
 
 <form class="" action="delQuora/" method="post">
@@ -128,14 +116,11 @@
   <input type="submit" value="Remove" />
 </form>
 
-  {% else %}
-  <br/>
-  <form method="post" action='quora/'>
-    {% csrf_token %}
-    <strong> Quora: </strong> <br/>
-    Enter Username &nbsp;&nbsp;<input name='username' placeholder='username' value=""/>
-    <input type="submit" value="Submit">
-  </form>
-  {% endif %}
-
-{% endblock %}
+{% else %}
+<br/>
+<form method="post" action='quora/'>
+  {% csrf_token %}
+  <strong> Quora: </strong> <br/> Enter Username &nbsp;&nbsp;<input name='username' placeholder='username' value="" />
+  <input type="submit" value="Submit">
+</form>
+{% endif %} {% endblock %}

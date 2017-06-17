@@ -13,9 +13,9 @@
 
   <title>Techhood</title>
 
-  <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static " css/bootstrap.min.css " %}" rel="stylesheet">
 
-  <link href="{% static "css/full.css" %}" rel="stylesheet">
+  <link href="{% static " css/full.css " %}" rel="stylesheet">
 </head>
 
 <body>
@@ -52,13 +52,11 @@
     </div>
   </nav>
 
-  {% block content %}
+  {% block content %} {% endblock %}
 
-  {% endblock %}
+  <script src="{% static " js/jquery.js " %}"></script>
 
-  <script src="{% static "js/jquery.js" %}"></script>
-
-  <script src="{% static "js/bootstrap.min.js" %}"></script>
+  <script src="{% static " js/bootstrap.min.js " %}"></script>
 
 </body>
 
